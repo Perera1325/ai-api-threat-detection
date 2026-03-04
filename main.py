@@ -1,3 +1,4 @@
+from gateway.metrics import get_metrics
 from fastapi import FastAPI, Request
 from gateway.request_filter import analyze_request
 
@@ -18,3 +19,7 @@ async def api_gateway(request: Request):
         return {"status":"blocked"}
 
     return {"status":"allowed"}
+
+@app.get("/metrics")
+def metrics():
+    return get_metrics()
