@@ -1,7 +1,20 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from gateway.request_filter import analyze_request
 
 app = FastAPI()
 
 @app.get("/")
 def home():
-    return {"message": "AI API Threat Detection Gateway Running"}
+    return {"message":"AI API Threat Detection Gateway Running"}
+
+@app.post("/api")
+async def api_gateway(request: Request):
+
+    data = await request.json()
+
+    decision = analyze_request(data)
+
+    if decision == "block":
+        return {"status":"blocked"}
+
+    return {"status":"allowed"}
