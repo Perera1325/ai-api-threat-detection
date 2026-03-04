@@ -46,3 +46,23 @@ Request logging
 
 Attack simulation testing
 
+
+
+Authentication
+
+
+
+The gateway includes authentication support.
+
+
+
+Features
+
+
+
+\- API key validation
+
+\- JWT token verification
+
+\- protected APIs
+
