@@ -1,9 +1,15 @@
 from fastapi import FastAPI, Request
 
+# security modules
 from gateway.request_filter import analyze_request
 from gateway.auth import validate_api_key, validate_jwt
+
+# monitoring modules
 from gateway.metrics import get_metrics
 from gateway.threat_engine import calculate_threat_level
+
+# routing engine
+from gateway.router import route_request
 
 
 app = FastAPI()
@@ -28,7 +34,6 @@ async def api_gateway(request: Request):
 
     # JWT VALIDATION
     if token:
-
         token = token.replace("Bearer ", "")
 
         payload = validate_jwt(token)
@@ -36,21 +41,26 @@ async def api_gateway(request: Request):
         if not payload:
             return {"status": "invalid token"}
 
-    # READ REQUEST DATA
+    # READ REQUEST BODY
     data = await request.json()
 
-    # ANALYZE TRAFFIC
+    # AI SECURITY ANALYSIS
     decision = analyze_request(data)
 
     if decision == "block":
         return {"status": "blocked"}
 
-    return {"status": "allowed"}
+    # ROUTE REQUEST TO BACKEND SERVICE
+    backend_response = route_request(data)
+
+    return {
+        "status": "allowed",
+        "backend_response": backend_response
+    }
 
 
 @app.get("/metrics")
 def metrics():
-
     return get_metrics()
 
 
