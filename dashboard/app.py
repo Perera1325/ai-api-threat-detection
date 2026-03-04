@@ -19,3 +19,17 @@ threat = requests.get(threat_url).json()
 st.subheader("System Threat Level")
 
 st.metric("Threat Level", threat["threat_level"])
+
+level = threat["threat_level"]
+
+if level == "LOW":
+    st.success("System Secure")
+
+elif level == "MEDIUM":
+    st.warning("Suspicious Activity Detected")
+
+elif level == "HIGH":
+    st.error("High Attack Traffic")
+
+else:
+    st.error("CRITICAL SECURITY ALERT")
