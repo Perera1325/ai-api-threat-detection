@@ -1,0 +1,20 @@
+Client
+   │
+   ▼
+API Gateway
+   │
+   ├ Authentication
+   ├ AI Threat Detection
+   ├ Rate Limiting
+   ├ IP Reputation
+   │
+   ▼
+Routing Engine
+   │
+   ├ Service A
+   └ Service B
+
+Monitoring
+   │
+   ├ Metrics API
+   └ Streamlit Dashboard
