@@ -11,3 +11,11 @@ st.metric("Allowed Requests", data["allowed"])
 st.metric("Blocked Requests", data["blocked"])
 
 st.write("Real-time API threat monitoring system")
+
+threat_url = "http://127.0.0.1:8000/threat-level"
+
+threat = requests.get(threat_url).json()
+
+st.subheader("System Threat Level")
+
+st.metric("Threat Level", threat["threat_level"])
