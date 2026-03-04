@@ -28,3 +28,21 @@ Architecture
 
 Client → AI Threat Layer → API Gateway → Microservices
 
+
+
+Security Features
+
+
+
+AI anomaly detection
+
+IP reputation filtering
+
+Dynamic rate limiting
+
+API traffic monitoring
+
+Request logging
+
+Attack simulation testing
+
